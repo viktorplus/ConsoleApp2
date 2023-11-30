@@ -20,13 +20,15 @@ namespace ConsoleApp2
                        join style in styles on game.IdStyle equals style.Id
                        select new
                        {
-                           ZooName = zoo.Name,
-                           AnimalName = animal.Name
+                           GameName = game.Name,
+                           StudioName = studio.Name,
+                           StyleGame = style.Name,
+                           DataGame = game.Date
                        };
 
                     foreach (var item in query)
                     {
-                        Console.WriteLine($"ZooName: {item.ZooName}, AnimalName: {item.AnimalName}");
+                        Console.WriteLine($"GameName: {item.GameName}, StudioName: {item.StudioName}, StyleGame: {item.StyleGame}, DateGame: {item.DataGame}");
                     }
                 }
             }
