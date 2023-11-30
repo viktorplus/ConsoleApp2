@@ -12,9 +12,9 @@ namespace ConsoleApp2
         public string Name { get; set; }
         public int IdStudio { get; set; }
         public int IdStyle {  get; set; }
-        public DateTime Date {get;set; }
+        public DateOnly Date {get;set; }
         public Game() { }
-        public Game(string name, int idstudio, int idstyle, DateTime date)
+        public Game(string name, int idstudio, int idstyle, DateOnly date)
         {
             Name = name;
             IdStudio = idstudio;
