@@ -104,13 +104,25 @@ public static void AddGame(GameContext db)
         return;
     }
 
-    var newGame = new Game
+    Console.Write("Введите режим игры однопользовательский - Single, Многопользовательский - Command: ");
+    string gamemode = Console.ReadLine();
+
+    Console.Write("Введите количество проданых копий: ");
+    if (!int.TryParse(Console.ReadLine(), out int copiessold))
+    {
+        Console.WriteLine("Некорректный ввод для количество проданых копий.");
+        return;
+    }
+
+            var newGame = new Game
     {
         Name = gameName,
         IdStudio = idStudio,
         IdStyle = idStyle,
-        Date = date
-    };
+        Date = date,
+        GameMode = gamemode,
+        CopiesSold = copiessold,
+        };
 
     db.Game.Add(newGame);
     db.SaveChanges();
@@ -136,12 +148,14 @@ public static void AddGame(GameContext db)
                                 StudioName = studio.Name,
                                 IdStyle = game.IdStyle,
                                 StyleGame = style.Name,
-                                DataGame = game.Date
+                                DataGame = game.Date,
+                                GameMode=game.GameMode,
+                                CopiesSold=game.CopiesSold
                             };
 
                 foreach (var item in query)
                 {
-                    Console.WriteLine($"IdGame: {item.IdGame}, GameName: {item.GameName}, IdStudio: {item.IdStudio},StudioName: {item.StudioName}, IdStyle: {item.IdStyle}, StyleGame: {item.StyleGame}, DateGame: {item.DataGame}");
+                    Console.WriteLine($"IdGame: {item.IdGame}, GameName: {item.GameName}, IdStudio: {item.IdStudio},StudioName: {item.StudioName}, IdStyle: {item.IdStyle}, StyleGame: {item.StyleGame}, DateGame: {item.DataGame}, GameMode: {item.GameMode}, CopiesSold: {item.CopiesSold}");
                 }
                 }
             catch (SqlException ex)

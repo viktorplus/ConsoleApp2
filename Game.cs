@@ -13,13 +13,17 @@ namespace ConsoleApp2
         public int IdStudio { get; set; }
         public int IdStyle {  get; set; }
         public DateOnly Date {get;set; }
+        public string GameMode { get; set; }
+        public int CopiesSold { get; set; }
         public Game() { }
-        public Game(string name, int idstudio, int idstyle, DateOnly date)
+        public Game(string name, int idstudio, int idstyle, DateOnly date, string gamemode, int copiessold)
         {
             Name = name;
             IdStudio = idstudio;
             IdStyle = idstyle;
             Date = date;
+            GameMode = gamemode;
+            CopiesSold = copiessold;
         }
 
         public void Print()
@@ -29,3 +33,12 @@ namespace ConsoleApp2
     }
 }
 
+/* 
+Install-Package Microsoft.EntityFrameworkCore.Tools
+
+Add-Migration GameMigration1
+To undo this action, use Remove-Migration.
+
+Drop-Database
+Update-Database
+*/
