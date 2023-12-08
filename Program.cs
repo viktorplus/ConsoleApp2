@@ -8,6 +8,7 @@ namespace ConsoleApp2
         static void Main(string[] args)
         {
             while (true)
+
             {
                 Console.WriteLine("Меню:");
                 Console.WriteLine("1. Добавить стиль");
