@@ -24,20 +24,3 @@ namespace ConsoleApp2
         }
     }
 }
-/*    create table[Style]
-(  [Id] int not null identity(1, 1) primary key,
-   [Name] nvarchar(100) not null,
-);
-    create table[Studio]
-(  [Id] int not null identity(1, 1) primary key,
-   [Name] nvarchar(100) not null,
-);
-
-Create table[Game] 
-(
-    [Id] int not null identity(1, 1) primary key,
-	[Name] nvarchar(100) not null,
-    [IdStudio] int foreign key references Studio(Id),
-	[IdStyle] int foreign key references Style(Id),
-	[Date] Date not null,
-);*/
