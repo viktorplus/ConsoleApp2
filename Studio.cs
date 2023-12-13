@@ -10,18 +10,23 @@ namespace ConsoleApp2
     {
         public int Id { set; get; }
         public string Name { set; get; }
+        public string Country { set; get; }
+        public string City { set; get; }
+
 
         public Studio()
         {
         }
-        public Studio (string name)
+        public Studio (string name, string country, string city)
         {
             Name = name;
+            Country = country;
+            City = city;
         }
 
         public void Print()
         {
-            Console.WriteLine($"Id: {Id}, Name: {Name}");
+            Console.WriteLine($"Id: {Id}, Name: {Name}, Country: {Country}, City: {City}");
         }
     }
 }
