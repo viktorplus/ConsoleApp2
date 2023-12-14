@@ -30,6 +30,7 @@ namespace ConsoleApp2
         {
             Console.WriteLine($"Id: {Id}, Name Game: {Name}, IdStudio: {IdStudio}, IdStyle: {IdStyle}, Date: {Date}" );
         }
+
     }
 }
 

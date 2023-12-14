@@ -352,18 +352,5 @@ namespace ConsoleApp2
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
