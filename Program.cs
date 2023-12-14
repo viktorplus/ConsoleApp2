@@ -1,94 +1,88 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ConsoleApp2;
+using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace ConsoleApp2
+internal class Program
 {
-    internal class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        while (true)
         {
-            while (true)
+            Console.WriteLine("Меню:");
+            Console.WriteLine("1. Показать Топ-3 студии с максимальным количеством игр.");
+            Console.WriteLine("2. Отобразить студию с максимальным количеством игр.");
+            Console.WriteLine("3. Отобразить самый популярный стиль по количеству игр.");
+            Console.WriteLine("4. Показать Топ-3 самые популярные стили по количеству продаж.");
+            Console.WriteLine("5. Показать Топ-3 самые популярные однопользовательские игры по количеству продаж.");
+            Console.WriteLine("6. Показать Топ-3 самые популярные многопользовательские игры по количеству продаж.");
+            Console.WriteLine("7. Отобразить самую популярную однопользовательскую игру по количеству продаж.");
+            Console.WriteLine("8. Отобразить самую популярную многопользовательскую игру по количеству продаж.");
+            Console.WriteLine("9. Отобразить самую популярную игру по количеству продаж.");
+            Console.WriteLine("10. Удалить игры с нулевым количеством продаж.");
+            Console.WriteLine("11. Удалить игры по количеству продаж.");
+            Console.WriteLine("12. Отобразить самую популярную однопользовательскую игру по количеству продаж.");
+            Console.WriteLine("13. Отобразить самую популярную многопользовательскую игру по количеству продаж.");
+            Console.WriteLine("14. Отобразить самую популярную игру по количеству продаж.");
+            Console.Write("Выберите действие (1-14): ");
+            string choice = Console.ReadLine();
+
+            using (GameContext db = new GameContext())
             {
-                Console.WriteLine("Меню:");
-                Console.WriteLine("1. Добавить стиль");
-                Console.WriteLine("2. Добавить студию");
-                Console.WriteLine("3. Добавить игру");
-                Console.WriteLine("4. Вывести все данные");
-                Console.WriteLine("5. Вывести все студии");
-                Console.WriteLine("6. Вывести все стили");
-                Console.WriteLine("7. Отображение количества однопользовательских и многопользовательских игр");
-                Console.WriteLine("8. Показать игру с максимальным количеством проданных копий определенного стиля");
-                Console.WriteLine("9. Отобразить Топ-5 игр по наибольшему количеству продаж определенного стиля");
-                Console.WriteLine("10. Отобразить Топ-5 игр по наименьшему количеству продаж определенного стиля");
-                Console.WriteLine("11. Отобразить полную информацию об игре");
-                Console.WriteLine("12. Отобразить название каждой студии и стиль игр, количество которых преобладает");
-                Console.WriteLine("13. Выход");
-
-                Console.Write("Выберите действие (1-13): ");
-                string choice = Console.ReadLine();
-
-                using (GameContext db = new GameContext())
+                switch (choice)
                 {
-                    switch (choice)
-                    {
-                        case "1":
-                            GameService.AddStyle(db);
-                            break;
-                        case "2":
-                            GameService.AddNewStudio(db);
-                            break;
-                        case "3":
-                            GameService.AddGame(db);
-                            break;
-                        case "4":
-                            GameService.PrintAll(db);
-                            break;
-                        case "5":
-                            GameService.PrintStudios(db);
-                            break;
-                        case "6":
-                            GameService.PrintStyles(db);
-                            break;
-                        case "7":
-                            GameService.DisplayGameModesCount(db);
-                            break;
-                        case "8":
-                            Console.Write("Введите название стиля: ");
-                            string styleName8 = Console.ReadLine();
-                            GameService.DisplayMaxSoldGameByStyle(db, styleName8);
-                            break;
-                        case "9":
-                            Console.Write("Введите название стиля: ");
-                            string styleName9 = Console.ReadLine();
-                            GameService.DisplayTop5GamesBySales(db, styleName9, true);
-                            break;
-                        case "10":
-                            Console.Write("Введите название стиля: ");
-                            string styleName10 = Console.ReadLine();
-                            GameService.DisplayTop5GamesBySales(db, styleName10, false);
-                            break;
-                        case "11":
-                            Console.Write("Введите Id игры: ");
-                            if (int.TryParse(Console.ReadLine(), out int gameId11))
-                            {
-                                GameService.DisplayGameInfo(db, gameId11);
-                            }
-                            else
-                            {
-                                Console.WriteLine("Некорректный ввод для Id игры.");
-                            }
-                            break;
-                        case "12":
-
-                            GameService.DisplayStudioMaxGameByStyle(db);
-                            break;
-                        case "13":
-                            Environment.Exit(0);
-                            break;
-                        default:
-                            Console.WriteLine("Неверный выбор. Пожалуйста, выберите от 1 до 13.");
-                            break;
-                    }
+                    case "1":
+                        Linq.DisplayTop3StudiosWithMostGames(db);
+                        break;
+                    case "2":
+                        Linq.DisplayStudioWithMostGames(db);
+                        break;
+                    case "3":
+                        Linq.DisplayMostPopularStyle(db);
+                        break;
+                    case "4":
+                        Linq.DisplayTop3PopularStylesBySales(db);
+                        break;
+                    case "5":
+                        Linq.DisplayTop3SinglePlayerGamesBySales(db);
+                        break;
+                    case "6":
+                        Linq.DisplayTop3MultiPlayerGamesBySales(db);
+                        break;
+                    case "7":
+                        Linq.DisplayMostPopularSinglePlayerGameBySales(db);
+                        break;
+                    case "8":
+                        Linq.DisplayMostPopularMultiplayerGameBySales(db);
+                        break;
+                    case "9":
+                        Linq.DisplayMostPopularGameBySales(db);
+                        break;
+                    case "10":
+                        Linq.DeleteGamesWithZeroSales(db);
+                        break;
+                    case "11":
+                        Console.Write("Введите количество продаж: ");
+                        if (int.TryParse(Console.ReadLine(), out int salesCount))
+                        {
+                            Linq.DeleteGamesBySales(db, salesCount);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Некорректный ввод для количества продаж.");
+                        }
+                        break;
+                    case "12":
+                        Linq.DisplayMostPopularSinglePlayerGameBySales(db);
+                        break;
+                    case "13":
+                        Linq.DisplayMostPopularMultiplayerGameBySales(db);
+                        break;
+                    case "14":
+                        Linq.DisplayMostPopularGameBySales(db);
+                        break;
+                    default:
+                        Console.WriteLine("Неверный выбор. Пожалуйста, выберите от 1 до 14.");
+                        break;
                 }
             }
         }
